@@ -1,0 +1,76 @@
+- 설치
+npm i react-router // 웹, 앱 둘 다 쓰임, 필수 설치
+npm i react-router-dom // 웹 전용 설치
+npm i react-router-native // 앱 전용 설치
+
+우리는 router-dom을 사용하고 dom이 필요에 의해 router를 불러옴
+
+- 불러오기
+import {BrowserRouter} from 'react-router-dom'
+// hash, static router도 있다.
+// static은 주로 서버에서 사용
+
+- 사용
+최상위 컴포넌트를 BrowserRouter로 설정
+Routes로 감싸고
+Route로 path, 컴포넌트를 설정
+
+// 프론트에서만 동작, 서버에서는 따로 링크를 달아야함
+-> 새로고침하면 서버로 연동되서 에러
+
+// HashRouter
+- 주소 중간에 #이 들어감
+- 새로고침을 해도 화면이 보임
+- # 뒤에는 브라우저, 프론트만 인식 서버는 인식 못 함
+- SEO에서 불이익
+
+// params
+동적으로 변하는 부분
+/game/:name에서 :name 부분, :뒤 단어가 params라고 불림
+
+// 연결된 컴포넌트 정보 console.log 결과
+-location, history, match 출력
+-만약 위 정보가 없다
+import {withRouter} from 'react-router-dom'
+을 하고 export에서 withRouter(이름)을 통해 불러서 사용 가능
+
+// location, history, match 
+history = 페이지 이동 내역, 앞으로 가기, 뒤로 가기 가능
+눈 속임을 위한 메서드 보관
+match = match안의 params에 이름이 있다-> 분기처리 시 사용
+동적 주소 변환의 params 보관
+location = 주소, search, hash 등이 들어있음
+주소에 대한 정보
+
+// 페이지 변경 없이 주소 이동
+history.pushState('', '', '/hi'); // 브라우저의 히스토리
+- this.history와 다름, react-router의 history
+
+// 분기 처리
+this.props.match.params.name === ''을 조건으로 분기 설정 가능 // class
+
+
+// ? === 쿼리 스트링
+?key=value&key=value
+서버도 인식함
+location.search에서 확인 가능
+-URLSearchParams객체를 통해 key, value를 slice로 불러 올 수 있다.
+let x =URLSearchParams(this.props.location.search.slice(1))
+console.log(URLSearchParams.get('????뭐임'))
+
+// 예시
+category/:category?page={i}를 통해 목록과 페이지 변경 가능
+
+// 함수 컴포넌트
+const x =  ({match, location, history}) => { // 로 접근
+}
+
+// exact와 switch
+-switch
+route들을 감싸주는 컴포넌트
+먼저 일치하는 path를 불러옴
+문제는 /과 /x가 있으면 /x를 부르고 싶어도 /에서 먼저 걸린다. // 상위 주소도 일치하게 읽어버림
+
+- exact
+route에 적어줌
+정확하게 일치하는 경우에 불러옴

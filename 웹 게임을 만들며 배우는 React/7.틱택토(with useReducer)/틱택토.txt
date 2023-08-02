@@ -1,0 +1,26 @@
+// useReducer, 비동기임
+리덕스를 비슷하게 사용 가능함 
+소규모에서는 context API와 useReducer로 커버 가능
+-> state를 하나도 통합 가능
+useReducer(reducer, initialState, (지연 초기화, 잘 안씀))
+리덕스는 동기적으로 state가 변환
+
+initialState =  state 집합
+
+reducer = 함수, state를 어떻게 바꿀지 적어줌
+-- dispatch의 action객체를 해석해서 state를 변경해주는 역할
+
+// 정리
+state를 직접 변경할 수 없음, 이벤트가 발생하면 action을 dispatch해서 변경, state를 어떻게 변경하는지 reducer가 결정
+
+// tictactoe -> table -> tr ->td의 4단 구조에서 실제 클릭을 td만 한다.
+state는 tictactoe에서 관리, 클릭은 td 서로 중간에 매개체가 많다. (단점)
+context를 통해 데이터를 주고 받아 문제를 해결하지만 이번에는 state를 줄이는 reducer을 쓸 것
+
+
+// rendering 확인
+const ref = useRef([]);
+useEffect((
+    console.log(rowIndex === ref.current[0], cellIndex === ref.current[1], dispatch === ref.current[2], cellData===ref.current[3]); // false가 나오면 값이 바뀐것
+    ref.current[rowIndex, cellIndex, dispatch, cellData]
+)=> [rowIndex, cellIndex, dispatch, cellData])

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>구구단-함수 컴포넌트</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        'use strict';
+        const GuGuDan = () => {
+
+            const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+            const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+            const [value, setValue] = React.useState('');
+            const [result, setResult] = React.useState('');
+            const inputRef = React.useRef(null); //ref
+
+            const onSubmitForm = (e) => {
+                e.preventDefault();
+                if (parseInt(value) === first * second) {
+                    setResult(`${value} 정답`,)
+                    setFirst(Math.ceil(Math.random() * 9));
+                    setSecond(Math.ceil(Math.random() * 9));
+                    setValue('');
+                    inputRef.current.focus();
+                } else {
+                    setResult(`땡`,)
+                    setValue('');
+                    inputRef.current.focus();
+                }
+            };
+
+            
+            return (
+                <React.Fragment>
+                    <div>{first} 곱하기 {second}는?</div>
+                    <form onSubmit={onSubmitForm}>
+                        <input ref={inputRef} type="number" value={value} onChange={(e) => { setValue(e.target.value) }} />
+                        <button>입력!</button>
+                    </form>
+                    <div className="result" id="result">{result}</div>
+                </React.Fragment>
+            );
+        }
+    </script>
+    <script type="text/babel">
+        ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan />)
+    </script>
+</body>
+
+</html>
+
+<!-- 함수 컴포넌트에서 사용 -->
+<!-- setState랑 ref를 안씀, 함수에서도 앞의 것들을 사용할 수 있게하는게 hooks -->
+<!-- 많이 사용함 -->
+<!-- state를 변경하면 GuGuDAN함수를 재실행 === 느릴 수 있음 -->
+<!-- html의 class는 className을 이용, for은 htmlFor을 사용 -->
+
+<!-- state가 변경될 때마다 렌더링이 발생하면 입력 버튼을 누를 때 모든 state에서 렌더링이 발생해서 4번의 렌더링이 발생하나요?
+    -> 리액트가 비동기라 4개의 state를 한 번에 처리해 1번의 렌더링만 발생
+-->

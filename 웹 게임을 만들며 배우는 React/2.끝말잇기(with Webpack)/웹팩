@@ -1,0 +1,49 @@
+컴포넌트가 많아질 수록 코드길이가 길어짐 === 유지 보수가 어려움
+웹팩 : 여러 js파일을 하나의 js파일로 만들어주는 것
+? 노드를 알아야 함, 서버가 아닌 js실핼하는 도구로써 node를 알아라
+
+1. node 설치
+2. npm init -> package.json 생성됨
+3. packagename설정
+4. author 설정
+5. license 설정
+--> package.json이 생김 === 우리가 사용할 pakage들을 모아두는 것
+--> package에서 devDependencies는 개발에서만 사용하는 package
+--> Dependencies는 실제로도 사용
+
+npm i react react-dom
+npm i -D webpack webpack-cli // D는 개발에서만 사용, Develope의 D
+
+webpack.config.js 파일 생성
+
+// creat-react-app을 만드는 과정임
+
+// index.html의 app.js를 실행시키는 것이 목표
+// 문제는 js파일이 client, wordRelay 2개
+// 위 2개가 입력 app.js가 출력, webpack.congig파일에 저장
+
+빌드
+// webpack을 터미널에서 실행하려면 명령어로 등록을 하거나 package.json의 sctipt에 추가
+// -> npx webpack을 통해 실행
+// -> script에 추가시 npm run (이름)을 통해 실행
+"scripts": {
+    "dev": "webpack"
+},
+// app.js가 생김
+
+// babel 설치
+npm i -D @babel/core == 옛날 문법을 최신문법으로 변경
+npm i -D @babel/preset-env == 바벨을 내 환경에 맞게 설정
+npm i -D @babel/preset-react == jsx를 해석
+npm i -D babel-loader == 바벨과 webpack을 연결
+webpack.config.js에 rules로 연결
+
+// 자동 빌드
+npm i -D react-refresh  @pmmmwh/react-refresh-webpack-plugin
+npm i -D webpack-dev-server
+
+config에 plugin과 dev-server 작성
+package.json에 dev를 "webpack serve --env development"로 변경
+
+hot reloading을 통해 변경된 것들만 로드
+즉, html에서 실행이 아닌 npm run dev를 통해 서버를 열어주면 jsx파일을 수정하면 실시간으로 반응 

@@ -1,0 +1,76 @@
+// lifecycle, 클래스 컴포넌트에서 사용
+componentDidMount
+- 렌더링이 처음 시작될 때 작동
+- 비동기 요청을 많이 함
+componentDidUpdate
+- 업데이트
+componentWillUnmount
+- 컴포넌트가 제거되기 직전
+- 비동기 요청 정리
+
+-- constructor,state 등 부분이 먼저 실행 -> 렌더링 -> ref 실행 -> componentDidMount 실행 (화면에 보임)
+-> setState,props 변경 -> shouldComponentUpdate(true) -> rerendering -> componentDidUpdate
+-> 부모가 나를 제거 -> componentWillUnmount -> 소멸
+
+-- hooks는 lifecycle이 없지만 useEffect를 통해 흉내 가능
+componentDidMount,componentDidUpdate 과 비슷한 역할
+return이 componentWillUnmount 역할
+
+2번째 인자로 []을 받는데 배열에 값이 없으면 한 번만 실행 === componentDidMount
+배열에 값이 있다 === componentDidUpdate과 비슷
+
+RSPHook으로 설명하면 []에 imgCoord가 들어갔는데, imgCooed가 바뀔 때 마다 interval이 실행
+
+
+
+// render()안에 setState를 하면 무한 rendering이 발생
+
+// setInterval()
+비동기에서 바깥 함수를 참조하면 클로져 문제 발생
+-- 작동 x
+->setTimeout 이나 setInterval 실행 시 내부 콜백 함수는 고정된 closure 를 가지게 됨
+따라서 참조하고 있는 변수가 변하더라도 호출 시점에 closure 는 고정되기 때문에 변수도 고정됨
+
+const {imgCoord} = this.state; // 값이 고정
+this.interval = setInterval(() =>{
+    if(imgCoord === rspCoord.바위){
+        this.setState({
+            imgCoord: rspCoord.가위,
+        })
+    } else if(imgCoord === rspCoord.가위){
+        this.setState({
+            imgCoord: rspCoord.보,
+        })
+    } else if(imgCoord === rspCoord.보){
+        this.setState({
+            imgCoord: rspCoord.바위,
+        })
+    }
+},1000)
+
+-- 작동
+this.interval = setInterval(() =>{
+    const {imgCoord} = this.state;
+    if(imgCoord === rspCoord.바위){
+        this.setState({
+            imgCoord: rspCoord.가위,
+        })
+    } else if(imgCoord === rspCoord.가위){
+        this.setState({
+            imgCoord: rspCoord.보,
+        })
+    } else if(imgCoord === rspCoord.보){
+        this.setState({
+            imgCoord: rspCoord.바위,
+        })
+    }
+},1000)
+
+
+// 함수 호출 변경??, 고차 함수
+onClick = { ( )=> this.onClickBtn('바위')} ==> onClick = {this.onClickBtn('바위')}
+onClickBtn = (x) => {} 에서 onClickBtn = (x) => () => {}
+
+// useEffect, useLayoutEffect
+useEffect 화면이 바뀌고 실행
+useLayoutEffect 화면이 바뀌기 전에 실행

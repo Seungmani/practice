@@ -1,0 +1,65 @@
+// 스마트폰 앱 종류
+1. 네이티브 앱
+- 안드로이드 자바 스위프트 등등
+- os 개발에 특화된 개발
+- 장점
+뛰어난 성능, 많은 기능 사용 가능
+- 단점
+필요한 지식이 많아 개발 속도가 느림
+
+2. 크로스 플랫폼
+- js, react-native, flutter
+- 하나의 언어로 여러 플랫폼 개발
+- 장점
+빠른 개발 가능
+- 단점
+네니티브 대비 낮은 성능 및 기능 제한
+
+3. 하이브리드 앱
+- 웹을 앱에 맞춘 것
+- 하나의 언어로 여러 플랫폼 개발
+- 장점
+빠른 개발 가능
+- 단점
+네니티브 대비 낮은 성능 및 기능 제한
+
+-- 여기서는 js와 react-native를 이용한 크로스 플랫폼 앱을 만들 것
+-> 한 번의 개발로 android, ios 둘 다 지원 가능
+
+// react-native? expo?
+- react-native
+android, ios를 js를 통해 쉽게 만들 수 있게 해주는 framework
+- expo
+RN을 더 쉽게 만들어 주는 framework? tool? 도구
+
+쉽게 만드는 것이 장점이지만, 각 os의 신기능을 바로바로 반영하지 못함, 세부적인 기능들을 구현하지 못 하는 경우도 있다.
+
+// webview
+웹을 앱으로 보여주는 것 (오늘 할 것)
+
+// 환경 세팅
+node 설치, 
+
+// cli
+command line interface
+
+
+// https://docs.expo.dev/build/setup/
+빌드 -> native앱으로 변경됨
+// https://docs.expo.dev/build-reference/apk/
+
+npx expo start --tunnel
+
+
+What would you like your Android application id to be? // 고유해야 함
+com.회사이름.앱 이름 // 주로 많이 사용, 한글 사용 x
+
+
+
+--- webview로 변경
+// https://docs.expo.dev/versions/latest/sdk/webview/
+
+
+// asset
+icon.png가 앱 메인화면
+adapting = 로딩 화면

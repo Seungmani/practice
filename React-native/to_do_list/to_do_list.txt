@@ -1,0 +1,36 @@
+// input, button, date유지에 대해 배울 것
+
+// paddingHorizontal
+padding을 수평으로 줌, 좌-우 다 줌
+
+
+-- touch 관련 component
+// TouchableOpacity
+터치하면 자동으로 투명화됨
+activeOpacity={num}을 통해 글자 투명도 조절가능
+
+// TouchableHighlight
+underlayColor={}를 지정하면 터치시 배경화면이 변경 됨
+onPress={()=>{}}에 touch시 이벤트를 넣어줌
+activeOpacity={num}을 통해 글자 투명도 조절가능
+
+// TouchableWithoutFeedback
+화면 가장 위에서 일어나는 탭 이벤트에 반응 함
+그래픽, ui 변화 없이 onPress 반응만 받아옴
+
+// Pressable
+위 3개 component와 비슷하지만 더 많은 기능을 제공
+
+-- state에 따른 화면 전환
+- work, travel버튼에 따라 화면이 달라지게
+
+- input
+// text를 적을 수 있는 방법은 오직 textInput component만 존재
+// onChangeText를 통해 우리가 입력한 값을 받을 수 있다.
+// keyboardType을 통해 키보드를 변경가능, 숫자만 보이거나 등등
+// returnKeyType을 통해 확인 버튼 부분을 변경 할 수 있다.
+// secureTextEntry을 통해 글을 숨길 수 있다.
+// onSubmitEditing 글을 전송
+
+- 객체 전달
+// 여기서도 중요한건 객체를 새로 만들 때 assign을 이용해서 객체의 참조관계를 끊어야 함

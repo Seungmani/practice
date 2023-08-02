@@ -1,0 +1,14 @@
+// context
+틱택토에서 dispatch가 table->tr->td를 거쳐서 전달되는데 이를 틱택토 -> td로 바로 전송해줌
+
+- createContext를 import
+- Context를 전달 받을 자식 컴포넌트를 Provider를 통해 감싸야함
+<createContext.Provider value={자식에게 전달할 데이터}>
+    <자식 1/>
+    <자식 2/>
+    ...
+<createContext.Provider/>
+value가 바뀌면 모든 자식이 바뀌어서 성능문제가 생김 캐싱을 통해 해결, 필수
+
+자식은 jsx파일에서 useContext를 통해 값을 저장
+-> const {dispatch} = useContext(TableContext)

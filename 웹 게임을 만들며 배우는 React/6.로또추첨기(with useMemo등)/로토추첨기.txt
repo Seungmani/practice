@@ -1,0 +1,39 @@
+// memo처럼 하위 컴포넌트를 감싸는 컴포넌트를 high order component, hoc라고 함
+
+// useMemo, useCallback
+useMemo =  복잡한 함수 결괏값을 기억
+useRef =  일반 값을 기억
+useCallback = 함수 자체를 기억
+
+memo, callback을 통해 매번 함수 및 값의 변경을 막아서 불필요한 렌더링을 막자
+- 자식 컴포넌트에 함수를 넘길 때 callback을 통해 자식의 불필요한 렌더링을 막아야 함
+
+
+// react 만들 때 항상 console.log를 통해 내가 원할 때만 실행되는지 확인
+
+// hook tips
+- hook는 변수 및 함수 순서가 매우 중요
+- hook들은 조건문, 반복문에 넣지 말자
+
+- useMemo는 []안의 값이 변경될 때까지 값을 저장
+- useCallBack은 []안의 값이 변경될 때까지 함수를 저장
+- useEffect는 []안의 값이 변경되거나 조건이 맞으면 함수를 실행
+
+useEffect(()=>{
+    // componentDidMount
+}, [// componentDidUpdate])
+
+- useEffect를 componentDidUpdate만 사용하는 방법
+const mounted = useRef(false);
+useEffect(() =>{
+    if(!mounted.current){ // 조건 추가
+        mounted.current=true;
+    } else{
+        // 실행
+    }
+},[바뀌는 값])
+
+- useEffect를 componentDidMount 사용하는 방법
+useEffect(()=>{
+    // componentDidMount
+}, []) // 빈배열

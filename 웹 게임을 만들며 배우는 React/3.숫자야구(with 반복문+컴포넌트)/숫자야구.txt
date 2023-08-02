@@ -1,0 +1,64 @@
+- require Vs import
+require은 node의 모듈
+node에서는 require을 쓰고 리액트에서는 import사용
+node를 common.js를 따른다.
+import와 require은 babel이 알아서 해석해서 우리가 그냥 호환가능
+webpack은 노드가 실행 === const로 import한다.
+
+- 반복문과 props -
+- 반복문 map
+항상 고유한 key값을 넣어줘야 한다.
+['like','a'].map((v)=>{
+    return(
+        <li key={고유한 값을 넣어줘야 함}>{v}</li>
+    )
+})
+
+- 화살표 함수 사용이유
+내부 변수로 this를 사용 시 문제가 발생
+this binding이 class나 함수가 아닌 window에 binding
+class는 construct에 state를 적어주고 함수는 this.함수.bind(this)를 사용해야 한다.
+
+////
+onSubmitForm = (e) =>{
+    e.preventDefault();
+    if(this.state.value === this.state.answer.join('')){
+        this.setState({
+            result : '홈런',
+            tries: [...this.state.tries, {try: this.state.value, result: "홈런!!!"}], // 입력 값과 결과를 입력
+        })
+    } else{}
+}
+-> react는 참조가 변경되어야 렌더링을 함
+--> array=[]
+--> array.push(1);
+--> 위 array는 array===array 값이 true 즉, 참조의 변경이 없음
+
+-> 디스트럭쳐 할당을 해야함.
+--> array=[]
+--> array.push(1);
+--> array2=[...array, 2];
+--> 위 array는 array===array2 값이 false, 새 배열을 만들어 반환해야 함
+
+// 함수 컴포넌트에서 useState로 함수
+const [answer, setAnswer] = useState(getNumbers());
+-> 매번 rerendering이 발생, 하지만 useState가 알아서 처음 값만 answer에 저장하고 다음 값은 무시
+const [answer, setAnswer] = useState(getNumbers);
+-> rerendering이 발생 x
+
+// reactDevtool
+
+// 성능 문제 해결( 불필요한 렌더링 막기)
+render은 pops나 state(setState를 호출할 때) 또는 부모 컴포넌트가 변경될 때 발생, 다른 컴포넌트도 렌더링 됨
+shouldComponentUpdate()에 렌더링 조건을 적어줄 수 있다.
+또는 pureComponent 사용 (클래스 컴포넌트)
+-- 객체, 배열 같이 참고관계는 좀 어려움
+-- 항상 새로운 객체 배열을 만들어라 (디스트럭쳐 배열)
+
+함수 컴포넌트는 memo사용 === 부모 컴포너트의 변경에 의한 리렌더링만 막아줌, 이름이 이상해짐 === displayName 설정
+함수는 값이 변경되면 함수를 다시 불러온다. === 별로인 점
+
+// class 컴포넌트의 state에는 객체를 쓰지 말자
+
+// render안에 절대 setState 금지
+// props 값은 자식이 바꿀 수 없다. 변경하려면 useState로

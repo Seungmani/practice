@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>구구단-함수컴포넌트2</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        'use strict';
+        const GuGuDan = () => {
+
+            const [state, setState] = React.useState({
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+                result: '',
+            })
+            const inputRef = React.useRef(null); //ref
+
+            const onSubmitForm = (e) => {
+                e.preventDefault();
+                if (parseInt(state.value) === state.first * state.second) {
+                    setState({
+                        result: ` ${prev.value} 정답`,
+                        first: Math.ceil(Math.random() * 9),
+                        second: Math.ceil(Math.random() * 9),
+                        value: '',
+                    });
+                    inputRef.current.focus();
+                } else {
+                    setState({ // 문제가 발생, first, second가 사라짐
+                        result: "땡",
+                        value: '',
+                    });
+                    inputRef.current.focus();
+                }
+            };
+
+
+            return (
+                <React.Fragment>
+                    <div>{state.first} 곱하기 {state.second}는?</div>
+                    <form onSubmit={onSubmitForm}>
+                        <input ref={inputRef} type="number" value={state.value} onChange={(e) => { setState({ value: e.target.value }) }} />
+                        <button>입력!</button>
+                    </form>
+                    <div className="result" id="result">{state.result}</div>
+                </React.Fragment>
+            );
+        }
+    </script>
+    <script type="text/babel">
+        ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan />)
+    </script>
+</body>
+
+</html>
+
+
+<!-- hook들을 하나의 객체로 관리하면  set을 통해 값을 변경할 때 일부 값만 변경하면 나머지 변경하지 않은 값들은 사라진마.-->

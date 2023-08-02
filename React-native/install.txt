@@ -1,0 +1,29 @@
+// react-native
+브라우저, 웹을 사용 x
+단지 ios, android같은 운영체제를 구성하기 위한 개발자들을 위한 인터페이스
+
+// RN은 초기 설정이 귀찮음
+APP을 만드는 소프트웨어를 다운 받아야 함
+
+// test 목적으로 쓸거임
+// 배포는 따로 설치가 필요할 듯?
+
+// RN은 code + 코드가 운영체제와 통신 할 수 있도록 하는 인프라 시설이다.
+// RN APP을 다운 받으면 js+기본 시설을 다운받는 것
+
+// RN은 shell하고 같다
+js코드는 운영체제와 이야기 할 수 있게 하는 것 -> java가 설치되어야 하는 이유
+
+코드 작성 -> compile -> xcode, java로 apk로 만들어서 넣는다. -> app store로 전송
+
+// 여기서는 expo를 사용
+npm install --global expo-cli // 설치
+
+
+// RNCode : button component -> bridge를 통해 ios/android에게 button을 만들어줘 요청 -> 만들어줌
+bridge부터는 알아서 작동함
+
+// 작동
+app에서 touch가 발생 -> native가 인지하고 bridge에서 json data로 js로 전송 -> js는 'touch가 발생'이라는 메시지를 받고 '화면 색을 변경'이라고 대답 (browser가 아님)
+-> 대답이 bridge로 전송 -> native를 통해 app에 변화를 보여줌 
+-- 통신을 위해 java, xcode 같은 것이 필요, 여기서는 expo로 할 것

@@ -1,0 +1,80 @@
+// default APP.js 해석
+- RN은 웹 사이트가 아니라 html tag를 사용할 수 없다.
+div -> view를 사용
+모든 글은 text에 넣어야 함 -> 밖에 쓰면 에러 발생
+css도 가능항 것과 불가능 한 것이 있다 -> 99%는 사용 가능
+
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style
+    ={styles.container}>
+      <Text style
+      ={{fontSize:28}}>Open up App.js to start working on your app!</Text>
+      <StatusBar style
+      ="auto" />
+    </View>
+  );
+}
+
+-StyleSheet
+자동완성 기능을 제공
+그냥 return에 같이 적어도 상관없다.
+container같은 이름에 규칙이 없어서 편하게 사용가능
+
+const styles = StyleSheet.create({ // object를 생성
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+- 밑처럼 작성 후 style
+={styles2.container}를 해도 상관없지만 자동완성을 지원 x
+const styles2 = {
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+}
+
+-- rn은 css 오류를 다 표시해줌
+
+- StatusBar
+시계, 배터리, 와이파이 등을 표시함
+화면에 표시되지 않고 단순히 os와 소통하는 역할
+
+// third-party-component
+- component
+return안에 있는 component는 화면에 보여지는 부분
+- API
+js 코드
+
+API, component 가져다가 잘 쓰기
+https://docs.expo.dev/versions/latest/
+https://reactnative.dev/docs/vibration
+
+// layout
+flex
+- 모든 view는 기본적으로 flex 속성
+- flexDirection은 column이 기본 값 // 웹과 반대
+
+대부분은 높이와 너비를 지정 x
+- 모든 모바일 device의 높이와 너비를 맞추기 어려워서 height, width는 잘 사용 x
+- 반응형 레이아웃을 생각해야 함
+- 모든 view가 flex라는 걸 이용해서 flex:1하고 비율을 지정 , 부모는 무조건 flex사이즈를 지정해야 함
+- 자식은 부모를 기준으로 크기를 맞춤
+
+// 내 지역을 기준으로 16일 동안의 기상정보를 보여주는 app을 만들 것
+
+// rn은 scroll이 자동 적용 x component를 불러와야 함
+scrollView는 flex안 줌
+style도 contentContainerStyle로 변경
+
+// Dimensions을 통해 width, height를 알 수 있다.

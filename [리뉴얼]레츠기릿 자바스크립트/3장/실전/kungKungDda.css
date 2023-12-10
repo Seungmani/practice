@@ -1,0 +1,8 @@
+.inputContainer{
+	display: flex;
+	flex-direction: row;
+}
+
+.textInput{
+	margin-right: 10px;
+}
